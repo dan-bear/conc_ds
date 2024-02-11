@@ -36,8 +36,9 @@
  *     9*X seconds.
  *
  *   Note: If the burst rate is Y IOPS and the device rate
- *         is Z IOPS, the last request is going to take:
- *         (Y * X - Z * X) / Z = ((Y-Z)/Z) * seconds.
+ *         is Z IOPS when Y > Z, the last request is going
+ *         to take:
+ *         (Y * X - Z * X) / Z = ((Y-Z)/Z) * X.
  *
  *
  * Quantitative Question:
@@ -46,5 +47,8 @@
  *   implement the next methods:
  *   void fastWrite(unint64_t offset, void* pBuffer);
  *   void fastRead(uint64_t offset, void* pBufferOut);
+ *   
+ *   the methods should eliminate the read and write 
+ *   latency during bursts.
  *
  */
